@@ -1,0 +1,620 @@
+/*
+ * Cyberpunk 77 for Gomuks
+ * Variant: responsive vertical flip
+ *
+ * A Gomuks-native port of userspring's Cyberpunk 77 Sable theme:
+ * https://github.com/SableClient/themes/blob/main/themes/cyberpunk-77.sable.css
+ *
+ * Paste this file into Settings > Custom CSS. Gomuks keeps that setting in
+ * Matrix account data, so this file is deliberately not injected into its DB.
+ */
+
+@font-face {
+  font-family: "Oxanium";
+  font-style: normal;
+  font-weight: 200 500;
+  font-display: swap;
+  src: url("https://raw.githubusercontent.com/SableClient/themes/main/fonts/Oxanium/Oxanium-Variable.ttf")
+    format("truetype");
+}
+
+:root {
+  color-scheme: dark;
+
+  /* Original Cyberpunk 77 palette. */
+  --cp77-red-bg: hsl(0deg 45% 8%);
+  --cp77-red-surface: hsl(0deg 44% 10% / 67%);
+  --cp77-red-raised: hsl(0deg 44% 12%);
+  --cp77-red-hover: hsl(0deg 47% 28%);
+  --cp77-red-line: hsl(0deg 47% 33%);
+  --cp77-red-bright: hsl(0deg 70% 66%);
+  --cp77-blue-bg: hsl(200deg 44% 12%);
+  --cp77-blue-line: hsl(200deg 47% 33%);
+  --cp77-blue-bright: hsl(200deg 90% 73%);
+  --cp77-yellow: hsl(50deg 100% 65%);
+  --cp77-overlay: hsl(180deg 20% 6% / 87%);
+
+  /* Gomuks theme API. */
+  --font-stack: "Oxanium", "Tektur", "Rajdhani", system-ui, sans-serif;
+  --monospace-font-stack: "FiraCode Nerd Font", "Fira Code", monospace;
+  --background-color: var(--cp77-red-bg);
+  --login-background-color: hsl(180deg 20% 5%);
+  --text-color: hsl(200deg 90% 79%);
+  --inverted-text-color: hsl(0deg 45% 8%);
+  --secondary-text-color: hsl(200deg 35% 63%);
+  --semisecondary-text-color: var(--cp77-blue-bright);
+  --link-text-color: var(--cp77-blue-bright);
+  --visited-link-text-color: hsl(200deg 70% 66%);
+  --primary-color: hsl(0deg 55% 44%);
+  --primary-color-dark: hsl(0deg 51.56% 24%);
+  --error-color: var(--cp77-yellow);
+  --border-color: var(--cp77-red-line);
+  --pill-background-color: var(--cp77-blue-bg);
+  --disabled-input-background-color: hsl(0deg 27% 10%);
+  --url-preview-background-color: var(--cp77-blue-bg);
+  --highlight-pill-background-color: var(--cp77-yellow);
+  --highlight-pill-text-color: hsl(50deg 63.12% 18.52%);
+  --button-hover-color: var(--cp77-red-hover);
+  --light-hover-color: hsl(0deg 47% 28% / 55%);
+  --composer-background-color: hsl(0deg 25% 6.6%);
+  --timeline-hover-bg-color: hsl(0deg 27% 10% / 75%);
+  --timeline-highlight-bg-color: hsl(50deg 100% 65% / 12%);
+  --timeline-highlight-hover-bg-color: hsl(50deg 100% 65% / 18%);
+  --timeline-jump-bg-color: hsl(200deg 90% 73% / 12%);
+  --timeline-jump-hover-bg-color: hsl(200deg 90% 73% / 18%);
+  --timeline-soft-failed-bg-color: hsl(0deg 100% 65% / 24%);
+  --timeline-policy-server-spammy-bg-color: hsl(50deg 100% 65% / 16%);
+  --room-list-background: linear-gradient(
+    160deg,
+    hsl(0deg 45% 8%) 0%,
+    hsl(0deg 44% 12%) 54%,
+    hsl(200deg 44% 12%) 100%
+  );
+  --room-list-background-overlay: hsl(0deg 44% 10% / 82%);
+  --room-list-search-background-overlay: hsl(0deg 44% 8% / 90%);
+  --space-list-background-overlay: hsl(180deg 20% 6% / 87%);
+  --room-list-scrollbar-color: var(--cp77-red-bright) hsl(0deg 44% 10%);
+  --room-list-entry-hover-color: var(--cp77-red-hover);
+  --room-list-entry-selected-color: hsl(0deg 53.14% 34.01%);
+  --dimmed-overlay-background-color: var(--cp77-overlay);
+  --modal-box-shadow-color: hsl(0deg 70% 60% / 32%);
+  --popout-widget-box-shadow-color: hsl(200deg 90% 73% / 25%);
+  --emoji-selected-border-color: var(--cp77-blue-bright);
+  --image-pack-editor-selected-color: var(--cp77-blue-bg);
+  --poll-vote-bar-background-color: hsl(0deg 44% 22%);
+  --poll-vote-bar-highlight-color: var(--cp77-yellow);
+  --unread-counter-text-color: hsl(0deg 45% 8%);
+  --unread-counter-message-bg: var(--cp77-blue-bright);
+  --unread-counter-notification-bg: var(--cp77-yellow);
+  --unread-counter-marked-unread-bg: var(--cp77-red-bright);
+  --unread-counter-highlight-bg: var(--cp77-yellow);
+  --space-unread-counter-message-bg: hsl(200deg 70% 66%);
+  --space-unread-counter-notification-bg: var(--cp77-yellow);
+  --space-unread-counter-highlight-bg: var(--cp77-red-bright);
+  --sent-ok-color: var(--cp77-blue-line);
+  --sent-error-color: var(--cp77-yellow);
+  --blockquote-border-color: var(--cp77-red-bright);
+  --lightbox-button-color: var(--cp77-blue-bright);
+}
+
+body {
+  background:
+    radial-gradient(circle at 75% 0%, hsl(0deg 47% 22% / 35%), transparent 35%),
+    hsl(180deg 20% 5%);
+  font-size: 15px;
+  text-shadow: 0 0 3px rgb(200 255 255 / 25%);
+}
+
+main.matrix-main,
+div.room-view,
+div.timeline-view {
+  background: linear-gradient(to top, hsl(180deg 20% 5%) 40%, hsl(0deg 50% 14%))
+    fixed;
+}
+
+/* Architectural panels: red navigation, blue utility surfaces. */
+div.room-list-wrapper,
+div.room-header,
+div.settings-view,
+div.settings-view-box,
+div.right-panel,
+div.right-panel-header,
+div.context-menu,
+.modal > .modal-box,
+div.emoji-picker,
+div.sticker-picker,
+div.gif-picker,
+div.sync-status,
+div.connection-error-inner {
+  border-radius: 0 !important;
+  border-color: var(--cp77-red-line) !important;
+  box-shadow:
+    inset 2px 0 0 hsl(0deg 70% 60% / 18%),
+    0 0 12px hsl(0deg 70% 60% / 12%);
+}
+
+div.room-header,
+div.right-panel-header {
+  background: hsl(0deg 44% 10% / 84%);
+  border-bottom: 1px solid var(--cp77-red-line);
+}
+
+div.room-header::after,
+div.right-panel-header::after {
+  align-self: stretch;
+  width: 3rem;
+  margin-left: auto;
+  background: linear-gradient(
+    135deg,
+    transparent 48%,
+    var(--cp77-red-line) 50% 52%,
+    transparent 54%
+  );
+  content: "";
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+div.room-search-wrapper {
+  border-bottom: 1px solid var(--cp77-red-line);
+}
+
+div.room-entry {
+  --cp77-room-frame: hsl(0deg 55% 42% / 88%);
+  --cp77-room-fill: hsl(0deg 38% 9% / 88%);
+  --cp77-room-rail-width: 2px;
+  --cp77-room-shape: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 10px),
+    calc(100% - 10px) 100%,
+    0 100%
+  );
+
+  position: relative;
+  box-sizing: border-box;
+  width: calc(100% - 0.5rem);
+  margin: 2px 0.25rem;
+  background: var(--cp77-room-frame);
+  clip-path: var(--cp77-room-shape);
+}
+
+div.room-entry::before {
+  position: absolute;
+  z-index: 0;
+  inset: 1px;
+  background: var(--cp77-room-fill);
+  clip-path: var(--cp77-room-shape);
+  content: "";
+  pointer-events: none;
+}
+
+div.room-entry::after {
+  position: absolute;
+  z-index: 1;
+  top: 1px;
+  bottom: 1px;
+  left: 1px;
+  width: var(--cp77-room-rail-width);
+  background: var(--cp77-room-frame);
+  content: "";
+  pointer-events: none;
+}
+
+div.room-entry > * {
+  z-index: 2;
+}
+
+div.room-entry:hover,
+div.room-entry:focus {
+  --cp77-room-frame: hsl(0deg 70% 60% / 92%);
+  --cp77-room-fill: linear-gradient(
+    100deg,
+    hsl(0deg 42% 16% / 94%),
+    hsl(0deg 30% 10% / 92%)
+  );
+}
+
+div.room-entry:has(div.unread-count) {
+  --cp77-room-frame: hsl(0deg 70% 60% / 92%);
+}
+
+div.room-entry:has(div.unread-count.highlighted) {
+  --cp77-room-frame: var(--cp77-yellow);
+}
+
+div.room-entry.active {
+  --cp77-room-frame: var(--cp77-blue-bright);
+  --cp77-room-fill: linear-gradient(
+    100deg,
+    hsl(188deg 34% 28% / 94%),
+    hsl(205deg 25% 15% / 92%)
+  );
+  --cp77-room-rail-width: 3px;
+}
+
+div.space-bar > div.space-entry {
+  border: 1px solid transparent;
+  border-radius: 0;
+}
+
+div.space-bar > div.space-entry:hover,
+div.space-bar > div.space-entry:focus,
+div.space-bar > div.space-entry.active {
+  border-color: var(--cp77-blue-line);
+  box-shadow: 0 0 6px hsl(200deg 90% 73% / 25%);
+}
+
+/* Angular controls reproduce the original theme's clipped cyber borders. */
+button,
+a.button,
+span.button,
+input,
+textarea,
+select,
+div.url-preview,
+div.poll-answers > label.poll-answer {
+  border-radius: 0 !important;
+}
+
+button.thin-button,
+a.button.thin-button,
+button.primary-color-button,
+main.matrix-login button {
+  border-top: 1px solid var(--cp77-red-line);
+  border-left: 1px solid var(--cp77-red-line);
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 8px),
+    calc(100% - 8px) 100%,
+    0 100%
+  );
+}
+
+button:focus-visible,
+a.button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--cp77-blue-bright) !important;
+  outline-offset: 2px;
+}
+
+input,
+textarea,
+select {
+  border-color: var(--cp77-blue-line) !important;
+}
+
+div.message-composer {
+  border-top: 1px solid var(--cp77-blue-line);
+  border-right: 1px solid var(--cp77-blue-line);
+  border-radius: 0 !important;
+  box-shadow: 0 -4px 14px hsl(200deg 90% 73% / 8%);
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%);
+}
+
+div.timeline-event {
+  --cp77-message-fill: linear-gradient(
+    105deg,
+    hsl(210deg 12% 13% / 96%),
+    hsl(195deg 15% 18% / 96%)
+  );
+  --cp77-message-border: hsl(188deg 34% 42%);
+  --cp77-message-separator: hsl(188deg 34% 52% / 48%);
+  --cp77-message-outer-top: 0;
+  --cp77-message-inner-top: 1px;
+  --cp77-message-outer-bottom: -6px;
+  --cp77-message-inner-bottom: -5px;
+  --cp77-message-shape: polygon(
+    10px 0,
+    100% 0,
+    100% calc(100% - 16px),
+    calc(100% - 10px) calc(100% - 6px),
+    8px calc(100% - 6px),
+    0 100%,
+    0 10px
+  );
+
+  position: relative;
+  isolation: isolate;
+  width: calc(66.6667% - 0.75rem);
+  margin-top: 0.55rem;
+  margin-right: auto;
+  margin-bottom: 0.45rem;
+  margin-left: 0.5rem;
+  padding-top: 0.45rem;
+  padding-bottom: 0.45rem;
+  background-color: transparent !important;
+}
+
+div.timeline-event.same-sender,
+div.timeline-event.same-thread,
+div.timeline-event.small-event {
+  margin-top: 0.4rem;
+}
+
+div.timeline-event.own-event {
+  --cp77-message-fill: linear-gradient(
+    255deg,
+    hsl(163deg 34% 34% / 97%),
+    hsl(156deg 38% 26% / 97%)
+  );
+  --cp77-message-border: hsl(164deg 55% 58%);
+  --cp77-message-separator: hsl(164deg 55% 68% / 48%);
+  --cp77-message-outer-top: 0;
+  --cp77-message-inner-top: 1px;
+  --cp77-message-outer-bottom: -6px;
+  --cp77-message-inner-bottom: -5px;
+  --cp77-message-shape: polygon(
+    0 0,
+    calc(100% - 10px) 0,
+    100% 10px,
+    100% 100%,
+    calc(100% - 8px) calc(100% - 6px),
+    10px calc(100% - 6px),
+    0 calc(100% - 16px)
+  );
+
+  margin-right: 0.5rem;
+  margin-left: auto;
+}
+
+/* Join sequential events from one sender into a single conversation panel. */
+div.timeline-event:has(+ div.timeline-event.same-sender) {
+  --cp77-message-shape: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
+  --cp77-message-outer-bottom: 0;
+  --cp77-message-inner-bottom: 0;
+
+  margin-bottom: 0;
+  padding-bottom: 0.2rem;
+}
+
+div.timeline-event.own-event:has(+ div.timeline-event.same-sender) {
+  --cp77-message-shape: polygon(
+    0 0,
+    calc(100% - 10px) 0,
+    100% 10px,
+    100% 100%,
+    0 100%
+  );
+}
+
+div.timeline-event.same-sender {
+  --cp77-message-outer-top: 0;
+  --cp77-message-inner-top: 0;
+  --cp77-message-shape: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - 16px),
+    calc(100% - 10px) calc(100% - 6px),
+    8px calc(100% - 6px),
+    0 100%
+  );
+
+  margin-top: 0;
+  padding-top: 0.2rem;
+}
+
+div.timeline-event.own-event.same-sender {
+  --cp77-message-shape: polygon(
+    0 0,
+    100% 0,
+    100% 100%,
+    calc(100% - 8px) calc(100% - 6px),
+    10px calc(100% - 6px),
+    0 calc(100% - 16px)
+  );
+}
+
+div.timeline-event.same-sender:has(+ div.timeline-event.same-sender) {
+  --cp77-message-shape: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  --cp77-message-outer-bottom: 0;
+  --cp77-message-inner-bottom: 0;
+
+  margin-bottom: 0;
+}
+
+div.timeline-event::before,
+div.timeline-event::after {
+  position: absolute;
+  z-index: 0;
+  inset: var(--cp77-message-outer-top) 0 var(--cp77-message-outer-bottom);
+  clip-path: var(--cp77-message-shape);
+  content: "";
+  pointer-events: none;
+}
+
+div.timeline-event::before {
+  background: var(--cp77-message-border);
+}
+
+div.timeline-event::after {
+  inset: var(--cp77-message-inner-top) 1px var(--cp77-message-inner-bottom);
+  background: var(--cp77-message-fill);
+}
+
+div.timeline-event.same-sender::after {
+  background:
+    linear-gradient(
+        to right,
+        transparent,
+        var(--cp77-message-separator) 12% 88%,
+        transparent
+      )
+      top center / calc(100% - 1.5rem) 1px no-repeat,
+    var(--cp77-message-fill);
+}
+
+div.timeline-event > * {
+  z-index: 1;
+}
+
+div.timeline-event:hover:not(.no-hover),
+div.timeline-event.focused-event {
+  --cp77-message-fill: linear-gradient(
+    105deg,
+    hsl(210deg 14% 17% / 98%),
+    hsl(190deg 19% 23% / 98%)
+  );
+}
+
+div.timeline-event.own-event:hover:not(.no-hover),
+div.timeline-event.own-event.focused-event {
+  --cp77-message-fill: linear-gradient(
+    255deg,
+    hsl(163deg 38% 39% / 98%),
+    hsl(156deg 42% 30% / 98%)
+  );
+}
+
+div.timeline-event.highlight,
+div.timeline-event.jump-highlight,
+div.timeline-event.soft-failed,
+div.timeline-event.policy-server-spammy {
+  background-color: transparent;
+}
+
+div.timeline-event.highlight {
+  --cp77-message-fill: linear-gradient(
+    105deg,
+    hsl(50deg 100% 25% / 45%),
+    hsl(0deg 44% 12% / 62%)
+  );
+}
+
+div.timeline-event.jump-highlight {
+  --cp77-message-fill: linear-gradient(
+    105deg,
+    hsl(200deg 44% 22% / 58%),
+    hsl(0deg 44% 12% / 58%)
+  );
+}
+
+div.event-hover-menu,
+div.event-fixed-menu,
+div.url-preview,
+div.html-body code.hicli-inline-code,
+div.html-body pre {
+  border-radius: 0 !important;
+  box-shadow: inset 2px 0 0 var(--cp77-blue-line);
+}
+
+div.event-sender,
+div.room-name,
+div.settings-view h1,
+div.settings-view h2,
+div.settings-view h3,
+main.matrix-login h1,
+main.matrix-login h2 {
+  letter-spacing: 0.035em;
+}
+
+a,
+div.room-header svg,
+div.right-panel svg,
+div.space-bar svg {
+  filter: drop-shadow(0 0 4px hsl(0deg 65% 60% / 50%));
+}
+
+div.html-body a,
+div.url-preview a {
+  filter: drop-shadow(0 0 3px hsl(200deg 90% 73% / 35%));
+}
+
+::selection {
+  color: hsl(0deg 45% 8%);
+  background: var(--cp77-blue-bright);
+}
+
+/* Panel-local scanlines let visual media rise above the CRT layer. */
+div.room-list-wrapper,
+div.room-view,
+div.right-panel {
+  position: relative;
+}
+
+div.room-view {
+  container-type: inline-size;
+}
+
+div.room-list-wrapper::after,
+div.room-view::after,
+div.right-panel::after {
+  position: absolute;
+  z-index: 10;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 3px,
+    rgb(0 0 0 / 7%) 3px,
+    rgb(0 0 0 / 7%) 4px
+  );
+  content: "";
+  pointer-events: none;
+}
+
+div.lightbox,
+div.timeline-event:has(video:playing),
+div.timeline-event:has(video:fullscreen) {
+  z-index: 11;
+}
+
+@container (width <= 45rem) {
+  div.timeline-event,
+  div.timeline-event.own-event {
+    width: calc(100% - 1rem);
+  }
+
+  div.timeline-event:not(.own-event) {
+    --cp77-message-outer-top: -6px;
+    --cp77-message-inner-top: -5px;
+    --cp77-message-outer-bottom: 0;
+    --cp77-message-inner-bottom: 1px;
+    --cp77-message-shape: polygon(
+      0 0,
+      8px 6px,
+      calc(100% - 10px) 6px,
+      100% 16px,
+      100% 100%,
+      10px 100%,
+      0 calc(100% - 10px)
+    );
+  }
+
+  div.timeline-event:not(.own-event):has(+ div.timeline-event.same-sender) {
+    --cp77-message-shape: polygon(
+      0 0,
+      8px 6px,
+      calc(100% - 10px) 6px,
+      100% 16px,
+      100% 100%,
+      0 100%
+    );
+    --cp77-message-outer-bottom: 0;
+    --cp77-message-inner-bottom: 0;
+  }
+
+  div.timeline-event.same-sender:not(.own-event) {
+    --cp77-message-outer-top: 0;
+    --cp77-message-inner-top: 0;
+    --cp77-message-shape: polygon(
+      0 0,
+      100% 0,
+      100% 100%,
+      10px 100%,
+      0 calc(100% - 10px)
+    );
+  }
+
+  div.timeline-event.same-sender:not(.own-event):has(
+      + div.timeline-event.same-sender
+    ) {
+    --cp77-message-shape: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    --cp77-message-outer-bottom: 0;
+    --cp77-message-inner-bottom: 0;
+  }
+}
+
